@@ -26,6 +26,7 @@
 *.swo
 *.tmp
 
+
 # Ignore local configuration files
 .vscode/
 .idea/
@@ -33,3 +34,6 @@
 # Windows specifics
 Thumbs.db
 desktop.ini
+
+# Ignore GDB history
+.gdb_history
