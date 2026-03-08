@@ -1,0 +1,45 @@
+## RISC‑V Bare‑Metal Build & Debug Workflow
+
+### 🔧 Compile Assembly Source
+
+Use the RISC‑V GCC cross‑compiler to produce an ELF file:
+
+```bash
+riscv64-unknown-elf-gcc -O0 -ggdb -nostdlib \
+    -march=rv32i -mabi=ilp32 \
+    -Wl,-Tm.ld \
+    m.s -o main.elf
+```
+
+### 📦 Convert ELF to Raw Binary
+
+```bash
+riscv64-unknown-elf-objcopy -O binary main.elf main.bin
+```
+
+### 🖥️ Run on QEMU (RISC‑V 32‑bit Machine)
+
+```bash
+qemu-system-riscv32 -S -M virt -nographic \
+    -bios none -kernel main.elf \
+    -gdb tcp::1234
+```
+
+**Notes:**
+
+*   `-S` stops the CPU until the debugger connects
+*   `-gdb tcp::1234` opens a GDB server on port 1234
+*   `-bios none` prevents QEMU from loading its own boot ROM
+
+### 🐞 Start GDB and Connect to QEMU
+
+```bash
+gdb-multiarch main.elf \
+    -ex "target remote localhost:1234" \
+    -ex "break _start" \
+    -ex "continue" \
+    -q
+```
+
+This loads the ELF, connects to QEMU's GDB server, breaks at `_start`, and continues execution.
+
