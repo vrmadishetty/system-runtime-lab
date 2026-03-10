@@ -1,7 +1,3 @@
-Here is your content rewritten as a clean, structured **Markdown section** for a project README.
-
-***
-
 ## Goal
 
 Understand how **C variables** map to **assembly instructions**, focusing on how the compiler places data in memory and how the CPU accesses it.
@@ -34,7 +30,7 @@ make
 ### Generate Assembly Output
 
 ```bash
-make asm
+make assembly
 ```
 
 ### Debug with GDB
