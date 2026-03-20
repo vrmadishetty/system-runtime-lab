@@ -173,9 +173,6 @@ STR R2, [0x20000004]   ; Store result back to memory
 | 6    | CPU executes the instruction                      |
 | 7    | CPU writes the result back to memory              |
 
-***
-
-Here is your section rewritten in **clean, structured Markdown** with proper formatting, code blocks, and bullet lists.
 
 ***
 
@@ -232,10 +229,6 @@ Reading or writing to those addresses directly controls hardware — no special 
  
 ---
  
-Here is your entire content **cleaned, structured, and fully formatted in polished Markdown**, matching the style of your earlier sections.  
-No technical meaning was altered — only formatting, structure, and clarity improved.
-
-***
 
 # 4. Load / Store Architecture
 
