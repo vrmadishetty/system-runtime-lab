@@ -1,86 +1,40 @@
 #include <stdio.h>
+#include <math.h>
 
 
-int main()
-{
-    float a1 = 0, a2 = 0;
-    float ans;
-    char operator, option;
+int main(){
+    float samples_per_second = 44100;
+    int tone_freq = 440;
+    int duration = 2;
+    int max_value_encoding = 32767;
 
-    
-    printf("Welcome to the Calculator Program!\n");
+    int i = 0;
+    int total_samples = duration * samples_per_second;
 
-    do {
-        a1 = 0; a2 = 0;
-        printf("Enter first number: ");
-        if (scanf(" %f", &a1) != 1) {
-            printf("Invalid input! Please enter numeric values only. \n");
-            return 1;
-        }
+    float time = 0;
+    float angle;
 
-        printf("Enter second number: ");
-        if (scanf(" %f", &a2) != 1) {
-            printf("Invalid input! Please enter numeric values only. \n");
-            return 1;
-        }
+    short int sample;
 
+    FILE *f;
+    f = fopen("sine.raw", "wb");
+    if (f == NULL) {
+        printf("could not open a file. \n");
+        return -1;
+    }
 
-        printf("Enter arithmetic operator (+, -, *, /, ^ (exponential)): ");
-        scanf(" %c", &operator);
+    while (i < total_samples){
+        time = i * (1/samples_per_second);
+        angle = 2 * 3.14 * tone_freq * time;
 
-        switch (operator) 
-        {
-            case '+': 
-                        ans = a1 + a2;
-                        printf("%f %c %f = %f\n", a1, operator, a2, ans);
-                        break;
+        sample = max_value_encoding * sin(angle);
 
-            case '-': 
-                        ans = a1 - a2;
-                        printf("%f %c %f = %f\n", a1, operator, a2, ans);
-                        break;
-            
-            case '*': 
-                        ans = a1 * a2;
-                        printf("%f %c %f = %f\n", a1, operator, a2, ans);
-                        break;
-           
-            case '/': 
-                        if(a2 == 0)
-                        {
-                            printf("Error: Division by zero is not allowed! \n");
-                        }
-                        else {
-                            ans = a1 / a2;
-                            printf("%f %c %f = %f\n", a1, operator, a2, ans);
-                        }
-                        
-                        break;
-            case '^':
-                        if (a2 < 0){
-                            printf("Negative powers are not supported in this version.\n");
-                            break;
-                        }
-                        ans = 1;
-                        for(int i =0; i < (int)a2; i++) {
-                            ans *= a1;
-                        }
-                        printf("%f %c %f = %f\n", a1, operator, a2, ans);
-                        break;
+        fwrite(&sample, 2, 1, f);
+        printf("%d ", sample);
+        i = i + 1; 
+    }
 
-            default:
-                    printf("operator selection is not valid! \n");
-                    printf("Please enter the Correct operator such as +, -, *, /, %%");
-                    break;
-        }
-        label:
-            printf("Would you like to calculate again? (y/n): ");
-            scanf(" %c", &option);
-    } while (option == 'y' || option == 'Y');
-
-    printf("Thank you for using the Calculator Program: Goodbye!\n");
-
+    fclose(f);
     return 0;
-
 }
 
