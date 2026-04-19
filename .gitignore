@@ -1,0 +1,43 @@
+# Ignore all a.out files anywhere
+a.out
+
+# Ignore build artifacts
+[Bb]uild/
+[Bb]uild*/
+*.o
+*.obj
+*.so
+*.a
+*.dll
+*.exe
+*.out
+*.elf
+*.hex
+*.bin
+*.out
+
+# Ignore generated files
+*.su
+*.idb
+*.pdb
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*~
+*.swp
+*.swo
+*.tmp
+
+
+# Ignore local configuration files
+.vscode/
+.idea/
+
+# Windows specifics
+Thumbs.db
+desktop.ini
+
+# Ignore GDB history
+.gdb_history
