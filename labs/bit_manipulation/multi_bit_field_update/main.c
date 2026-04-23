@@ -13,14 +13,13 @@ int main()
     unsigned int mask = (1 << width)-1;
     printf("mask: 0x%x\n", mask);
 
-    REG &= ~(mask << 4);
+    REG &= ~(mask << width);
     printf("REG: 0x%x\n", REG);
 
     for (width = 1; width <= 8; width++)
     {
         printf("width = %d mask = 0x%X\n", width, (1 << width) - 1);
     }
-
 
     return 0;
 }
