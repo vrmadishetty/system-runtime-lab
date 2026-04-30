@@ -73,3 +73,18 @@ int toggleIthBit(int n, int pos)
     int mask = 1 << (pos - 1);
     return (n ^ mask);
 }
+
+uint32_t count_set_bits(uint32_t val)
+{
+    uint32_t count = 0;
+
+    if (val == 0)
+    return 0;
+
+    while(val)
+    {
+        val &= (val - 1);
+        count++;
+    }
+    return count;
+}

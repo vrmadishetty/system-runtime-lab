@@ -34,5 +34,7 @@ uint32_t is_power_of_four(uint32_t n);
 /* toggle the bit */
 int toggleIthBit(int n, int pos);
 
+/* count set bits */
+uint32_t count_set_bits(uint32_t val);
 
 #endif
